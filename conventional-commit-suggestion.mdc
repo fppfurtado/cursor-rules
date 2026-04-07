@@ -20,6 +20,22 @@ Seguir **[Conventional Commits](https://www.conventionalcommits.org/)**:
 - **Corpo** (opcional): linha em branco + bullets ou parágrafos se houver várias mudanças ou contexto necessário
 - **Breaking change:** rodapé `BREAKING CHANGE:` ou `!` após o tipo quando aplicável
 
+## Idioma da mensagem (obrigatório)
+
+Antes de sugerir a mensagem de commit, o agente deve **detectar o idioma** com base no histórico recente do repositório:
+
+1. Ler as **3 últimas mensagens de commit** (subject; pode incluir body se necessário).
+2. Identificar o idioma predominante entre elas (`pt-BR` ou `en`).
+3. Gerar a nova sugestão no **mesmo idioma predominante**.
+
+### Regra de decisão
+
+- **Maioria simples (2 de 3 ou 3 de 3):** usar o idioma majoritário.
+- **Empate/ambíguo (ex.: 1 PT, 1 EN, 1 neutra):** usar o idioma da mensagem mais recente entre as que têm idioma detectável.
+- **Sem histórico suficiente ou idioma não detectável:** perguntar ao usuário qual idioma deseja e, se não houver resposta, usar **inglês** como fallback.
+
+> Objetivo: manter consistência linguística do histórico de commits do projeto.
+
 ## Exemplos
 
 ```text
