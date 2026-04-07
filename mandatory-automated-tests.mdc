@@ -1,8 +1,7 @@
 ---
 description: All code changes MUST be accompanied by appropriate automated tests. No task is considered complete without test evidence.
-alwaysApply: true
+alwaysApply: false
 ---
-
 # Code Changes MUST Be Accompanied by Automated Tests
 
 ## Policy
