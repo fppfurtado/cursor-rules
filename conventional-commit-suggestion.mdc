@@ -1,0 +1,70 @@
+---
+description: Após alterações, sugerir mensagem de commit no padrão Conventional Commits.
+alwaysApply: false
+---
+
+# Sugestão de commit ao finalizar alterações
+
+Ao **concluir** um conjunto de alterações neste repositório (implementação, correção, testes ou documentação entregues), o agente deve **propor uma mensagem de commit** que sintetize o que foi feito.
+
+## Formato
+
+Seguir **[Conventional Commits](https://www.conventionalcommits.org/)**:
+
+```text
+<tipo>[escopo opcional]: <descrição curta no imperativo>
+```
+
+- **Tipos comuns:** `feat`, `fix`, `docs`, `style`, `refactor`, `perf`, `test`, `build`, `ci`, `chore`
+- **Descrição:** imperativo, sem ponto final, ~72 caracteres na primeira linha quando possível
+- **Corpo** (opcional): linha em branco + bullets ou parágrafos se houver várias mudanças ou contexto necessário
+- **Breaking change:** rodapé `BREAKING CHANGE:` ou `!` após o tipo quando aplicável
+
+## Exemplos
+
+```text
+feat(template): add P/N/R cycle templates with XXX naming convention
+
+fix(ci): correct stack-specific setup in workflow template
+
+docs(readme): align repo README with multi-stack layout
+```
+
+## Co-autoria de LLM
+
+Quando as alterações forem feitas **total ou parcialmente** por um LLM (via Cursor, Copilot, ChatGPT etc.), incluir o rodapé de co-autoria no commit:
+
+```text
+Co-authored-by: Claude Sonnet 4.5 <noreply@anthropic.com>
+```
+
+Use o formato `<Nome> <Família> <Versão>` correspondente ao modelo utilizado. Exemplos comuns:
+
+| Modelo utilizado | Rodapé |
+|------------------|--------|
+| Claude 3.5 Sonnet | `Co-authored-by: Claude Sonnet 3.5 <noreply@anthropic.com>` |
+| Claude 3.7 Sonnet | `Co-authored-by: Claude Sonnet 3.7 <noreply@anthropic.com>` |
+| Claude Sonnet 4.5 | `Co-authored-by: Claude Sonnet 4.5 <noreply@anthropic.com>` |
+| Claude Opus 4 | `Co-authored-by: Claude Opus 4 <noreply@anthropic.com>` |
+| GPT-4o | `Co-authored-by: ChatGPT GPT-4o <noreply@openai.com>` |
+| GPT-4.1 | `Co-authored-by: ChatGPT GPT-4.1 <noreply@openai.com>` |
+| o3 | `Co-authored-by: ChatGPT o3 <noreply@openai.com>` |
+| Gemini 2.5 Pro | `Co-authored-by: Gemini 2.5 Pro <176961590+gemini-code-assist[bot]@users.noreply.github.com>` |
+| GitHub Copilot | `Co-authored-by: GitHub Copilot <278720+github-copilot[bot]@users.noreply.github.com>` |
+| Cursor Composer | `Co-authored-by: Cursor Composer 2 <noreply@cursor.sh>` |
+
+O rodapé deve aparecer após uma linha em branco no final da mensagem de commit:
+
+```text
+feat(domain): add installment splitting rule
+
+- Implement ProRata value object
+- Add domain service for rateio calculation
+
+Co-authored-by: Claude Sonnet 4.5 <claude@anthropic.com>
+```
+
+## Quando sugerir
+
+- Após implementar ou corrigir algo **substantivo** (não é obrigatório para micro-ajustes triviais só de formatação, salvo se o usuário pedir).
+- A sugestão é **texto para o usuário colar** em `git commit -m` (ou equivalente); não executar `git commit` sem instrução explícita do usuário, salvo regra ou pedido em contrário.

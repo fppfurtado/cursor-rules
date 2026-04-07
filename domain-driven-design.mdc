@@ -1,0 +1,46 @@
+---
+description: Desenvolver soluções com Domain Driven Design alinhadas à estrutura em camadas e documentação de domínio do repositório.
+alwaysApply: true
+---
+
+# Domain Driven Design e arquitetura do projeto
+
+## Objetivo
+
+Planejar e implementar soluções **a partir do domínio**: vocabulário ubíquo, entidades, regras de negócio e limites de contexto — **sempre** respeitando a **estrutura de pastas e camadas já definidas** neste repositório, não inventando outra arquitetura paralela sem ADR.
+
+## Mapa deste repositório (obrigatório como referência)
+
+Antes de propor ou escrever código de produção em `src/erp_finance_agent/`, alinhar com:
+
+| Camada / artefato | Papel (DDD) | Uso |
+|-------------------|-------------|-----|
+| `docs/domain.md` | Modelo de domínio, ubiquitous language, regras | Ler/atualizar quando entidades ou regras mudarem |
+| `domain/` | Núcleo: entidades, value objects, regras puras | Sem dependência de framework, DB ou HTTP |
+| `app/` | Casos de uso / orquestração da aplicação | Coordena `domain` + portas; fluxos |
+| `infrastructure/` | Adaptadores técnicos | Persistência, clientes externos, filas |
+| `interfaces/` | Entrada/saída (API, CLI, webhooks) | Injeção de dependências para `app`/`domain` |
+| `interfaces/contracts/` | Contratos estáveis (OpenAPI, schemas) | Após spike ou início de ciclo |
+| `spikes/` | Experimentos descartáveis | Não misturar regras definitivas aqui sem refatorar para as camadas |
+| `src/main.py` | Composição e bootstrap | Wiring; **não** é `app/` |
+| `docs/architecture/adrs/` | Decisões estruturais | Mudanças de arquitetura relevantes → ADR |
+
+Se a estrutura real no disco divergir desta tabela, **a estrutura real e `src/README.md` prevalecem**; atualize mentalmente o mapa e sugira correção em documentação se houver drift.
+
+## Práticas obrigatórias
+
+1. **Ubiquitous language**: nomes de classes, funções e testes devem refletir termos de `docs/domain.md` (ou o que for acordado ao atualizar esse doc).
+2. **Dependências**: `domain` não importa `infrastructure` nem `interfaces`. Regras de negócio ficam testáveis sem I/O real quando possível.
+3. **Novos comportamentos**: preferir explicitar no domínio (entidades/serviços de domínio) e orquestrar em `app/`; evitar “lógica grossa” só em handlers HTTP ou em clients de API externa.
+4. **Contextos**: se o escopo crescer, considerar bounded contexts explícitos (documentados em `docs/domain.md`) em vez de um único “god module”.
+5. **Spikes**: código em `spikes/` pode ser mais solto; ao promover para produção, **migrar** para `domain` / `app` / `infrastructure` / `interfaces` conforme o papel.
+
+## Anti-padrões (evitar)
+
+- Colocar regra de negócio central só em `infrastructure/` ou só na camada HTTP sem modelo de domínio.
+- Duplicar conceitos do domínio com nomes diferentes no código e em `docs/domain.md`.
+- Ignorar `docs/domain.md` e a árvore `src/erp_finance_agent/` ao sugerir novos módulos na raiz do pacote sem justificativa de domínio.
+
+## Quando requisitos estão vagos
+
+É aceitável prototipar com menos camadas **desde que** fique claro que é temporário e que o alvo é consolidar em `domain` + camadas ao estabilizar — como descrito em `src/README.md`.
