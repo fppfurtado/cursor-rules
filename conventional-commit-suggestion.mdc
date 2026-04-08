@@ -91,7 +91,7 @@ Use o formato `<Nome> <Família> <Versão>` correspondente ao modelo utilizado. 
 | o3 | `Co-authored-by: ChatGPT o3 <noreply@openai.com>` |
 | Gemini 2.5 Pro | `Co-authored-by: Gemini 2.5 Pro <176961590+gemini-code-assist[bot]@users.noreply.github.com>` |
 | GitHub Copilot | `Co-authored-by: GitHub Copilot <278720+github-copilot[bot]@users.noreply.github.com>` |
-| Cursor Composer | `Co-authored-by: Cursor Composer 2 <noreply@cursor.sh>` |
+| Cursor Agent | `Co-authored-by: Cursor <cursoragent@cursor.com>` |
 
 O rodapé deve aparecer após uma linha em branco no final da mensagem de commit:
 
