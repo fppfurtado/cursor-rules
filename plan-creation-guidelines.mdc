@@ -1,0 +1,78 @@
+---
+description: Orientações gerais para criação de planos pelo agente — nomeação, autoria e anotação de complexidade nos ToDos
+globs: .cursor/plans/*.md
+alwaysApply: false
+---
+
+# Orientações para Criação de Planos
+
+Diretrizes obrigatórias para todo plano criado pelo agente em `.cursor/plans/`.
+
+## 1. Nomeação com numeração sequencial
+
+- Formato obrigatório: `NNN-<slug-do-plano>.plan.md` (prefixo de 3 dígitos).
+- Usar sempre o próximo número disponível (último existente + 1).
+- Não pular numeração sem justificativa explícita.
+
+### Critério operacional
+
+1. Listar arquivos existentes em `.cursor/plans/`.
+2. Identificar o maior prefixo `NNN-` já utilizado.
+3. Criar o novo plano com o próximo número.
+4. Se houver arquivos sem prefixo, manter sem renomear e sinalizar ao usuário.
+
+### Ferramenta com nome automático (ex.: CreatePlan)
+
+- Renomear imediatamente para o padrão `NNN-<slug>.plan.md`.
+- A tarefa só é concluída após validar que não ficou nenhum plano sem prefixo `NNN-`.
+- Se criado fora do workspace, mover para `.cursor/plans/` com nome correto e informar ao usuário.
+
+### Exemplos de nomeação
+
+- ❌ `transicao_s02_para_p02.plan.md`
+- ✅ `008-transicao-s02-para-p02.plan.md`
+
+## 2. Registro de autoria
+
+Incluir no corpo do plano (logo após o título `#`) um bloco de metadados de autoria com modelo e versão em formato legível.
+
+```markdown
+# Plano de Execução — Título
+
+> **Autor:** Claude 4 Opus (claude-4-opus-20260401)
+```
+
+- O campo **Autor** deve conter o nome comercial do modelo seguido do identificador de versão entre parênteses.
+- Se o modelo ou versão exatos não estiverem disponíveis, registrar a melhor aproximação conhecida e indicar com `~` (ex.: `~claude-4-opus`).
+
+## 3. Complexidade dos ToDos
+
+Cada item da lista `todos` no frontmatter YAML deve ter o campo `content` precedido por um indicador de complexidade entre colchetes. Esse indicador orienta a escolha do modelo que executará a tarefa.
+
+### Níveis de complexidade
+
+| Indicador        | Significado                                                        | Modelo sugerido          |
+|------------------|--------------------------------------------------------------------|--------------------------|
+| `[simple]`       | Tarefa mecânica ou pontual, sem decisão arquitetural               | Modelo rápido / barato   |
+| `[moderate]`     | Requer contexto local e pequenas decisões de implementação         | Modelo padrão            |
+| `[complex]`      | Envolve decisão arquitetural, múltiplos arquivos ou raciocínio longo | Modelo mais capaz       |
+
+### Formato no frontmatter
+
+```yaml
+todos:
+  - id: promote-sqlite-adapter
+    content: "[moderate] Promover adapter SQLite do spike para módulo de produção"
+    status: pending
+  - id: add-migration-bootstrap
+    content: "[complex] Implementar migração versionada com schema_migrations e bootstrap idempotente"
+    status: pending
+  - id: close-cycle-docs
+    content: "[simple] Atualizar checklist do P02 marcando critérios atendidos"
+    status: pending
+```
+
+### Critério de classificação
+
+- Considerar escopo de arquivos afetados, necessidade de raciocínio multi-passo e risco de regressão.
+- Na dúvida entre dois níveis, escolher o mais alto.
