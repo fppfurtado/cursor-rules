@@ -38,15 +38,29 @@ Antes de sugerir a mensagem de commit, o agente deve **detectar o idioma** com b
 
 ## Exemplos
 
+> Nota: todos os exemplos abaixo incluem o rodapé `Co-authored-by` porque foram gerados por LLM. Toda sugestão de commit produzida pelo agente deve seguir este padrão.
+
 ```text
 feat(template): add P/N/R cycle templates with XXX naming convention
 
-fix(ci): correct stack-specific setup in workflow template
-
-docs(readme): align repo README with multi-stack layout
+Co-authored-by: Claude Opus 4.6 <noreply@anthropic.com>
 ```
 
-## Co-autoria de LLM
+```text
+fix(ci): correct stack-specific setup in workflow template
+
+Co-authored-by: Claude Opus 4.6 <noreply@anthropic.com>
+```
+
+```text
+docs(readme): align repo README with multi-stack layout
+
+Co-authored-by: Claude Opus 4.6 <noreply@anthropic.com>
+```
+
+## Co-autoria de LLM (OBRIGATÓRIO)
+
+> **REGRA INVIOLÁVEL:** Toda sugestão de commit gerada por um LLM **DEVE** conter o rodapé `Co-authored-by`. Nunca omitir este rodapé — uma sugestão de commit sem ele está **incompleta e incorreta**.
 
 Quando as alterações forem feitas **total ou parcialmente** por um LLM (via Cursor, Copilot, ChatGPT etc.), incluir o rodapé de co-autoria no commit:
 
@@ -84,3 +98,14 @@ Co-authored-by: Claude Sonnet 4.5 <claude@anthropic.com>
 
 - Após implementar ou corrigir algo **substantivo** (não é obrigatório para micro-ajustes triviais só de formatação, salvo se o usuário pedir).
 - A sugestão é **texto para o usuário colar** em `git commit -m` (ou equivalente); não executar `git commit` sem instrução explícita do usuário, salvo regra ou pedido em contrário.
+
+## Checklist de validação (obrigatório antes de apresentar a sugestão)
+
+Antes de exibir a sugestão de commit ao usuário, o agente **deve verificar internamente** que todos os itens abaixo foram atendidos:
+
+- [ ] Formato Conventional Commits (`tipo[escopo]: descrição`)
+- [ ] Idioma detectado e consistente com o histórico
+- [ ] **Rodapé `Co-authored-by` presente** (se o agente participou das alterações)
+- [ ] Nome e versão do modelo corretos no rodapé
+
+Se algum item falhar — especialmente o rodapé de co-autoria — **corrigir antes de apresentar**. Não sugerir commit sem co-autoria quando o agente participou da criação ou edição do código.
