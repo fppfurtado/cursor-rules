@@ -1,11 +1,21 @@
 ---
-description: Após alterações, sugerir mensagem de commit no padrão Conventional Commits.
+description: Após alterações, sugerir commit em Conventional Commits; todo LLM deve anexar Co-authored-by (obrigatório, não negociável).
 alwaysApply: false
 ---
 
 # Sugestão de commit ao finalizar alterações
 
 Ao **concluir** um conjunto de alterações neste repositório (implementação, correção, testes ou documentação entregues), o agente deve **propor uma mensagem de commit** que sintetize o que foi feito.
+
+## Co-autoria LLM — bloqueante (ler primeiro)
+
+**Toda sugestão de commit** para trabalho **criado ou editado com assistência de LLM** (incluindo esta sessão no Cursor) **deve** incluir o rodapé `Co-authored-by` após **uma linha em branco**. Não é opcional, não depende de lembrar depois e **não** admite apenas o subject na resposta.
+
+- **Proibido:** enviar ao usuário só a primeira linha (`tipo(escopo): descrição`) sem o bloco `Co-authored-by`.
+- **Obrigatório:** a mensagem sugerida ao usuário é o **texto completo** (subject + linha em branco + `Co-authored-by: ...`), pronto para colar em `git commit` ou editor.
+- **Modelo:** usar a tabela em [Co-autoria de LLM (OBRIGATÓRIO)](#co-autoria-de-llm-obrigatório) (ex.: Cursor Composer → linha correspondente na tabela).
+
+Se o agente participou das alterações e for sugerir commit, **pare a resposta antes de enviar** e confira a secção **Checklist de validação** no fim deste arquivo; se faltar `Co-authored-by`, **não envie** — complete e só então envie.
 
 ## Formato
 
@@ -38,7 +48,7 @@ Antes de sugerir a mensagem de commit, o agente deve **detectar o idioma** com b
 
 ## Exemplos
 
-> Nota: todos os exemplos abaixo incluem o rodapé `Co-authored-by` porque foram gerados por LLM. Toda sugestão de commit produzida pelo agente deve seguir este padrão.
+> Todos os exemplos abaixo mostram o formato **completo** (subject + linha em branco + `Co-authored-by`). Respostas do agente devem replicar essa estrutura sempre que sugerirem commit por trabalho assistido por LLM.
 
 ```text
 feat(template): add P/N/R cycle templates with XXX naming convention
@@ -98,14 +108,15 @@ Co-authored-by: Claude Sonnet 4.5 <claude@anthropic.com>
 
 - Após implementar ou corrigir algo **substantivo** (não é obrigatório para micro-ajustes triviais só de formatação, salvo se o usuário pedir).
 - A sugestão é **texto para o usuário colar** em `git commit -m` (ou equivalente); não executar `git commit` sem instrução explícita do usuário, salvo regra ou pedido em contrário.
+- Se houver sugestão de commit e o agente tiver participado das alterações, a regra de **Co-authored-by** aplica-se **sempre** (mesmo que o corpo do commit seja só uma linha).
 
 ## Checklist de validação (obrigatório antes de apresentar a sugestão)
 
-Antes de exibir a sugestão de commit ao usuário, o agente **deve verificar internamente** que todos os itens abaixo foram atendidos:
+Antes de exibir a sugestão de commit ao usuário, o agente **deve verificar internamente** que todos os itens abaixo foram atendidos — **nesta ordem**:
 
-- [ ] Formato Conventional Commits (`tipo[escopo]: descrição`)
+- [ ] **Rodapé `Co-authored-by` presente** com nome/versão do modelo correto (obrigatório em qualquer sugestão de commit por trabalho assistido por LLM; não enviar sem isso)
+- [ ] Formato Conventional Commits (`tipo[escopo]: descrição`) na primeira linha
+- [ ] Linha em branco entre o fim do corpo (ou subject) e o `Co-authored-by`
 - [ ] Idioma detectado e consistente com o histórico
-- [ ] **Rodapé `Co-authored-by` presente** (se o agente participou das alterações)
-- [ ] Nome e versão do modelo corretos no rodapé
 
-Se algum item falhar — especialmente o rodapé de co-autoria — **corrigir antes de apresentar**. Não sugerir commit sem co-autoria quando o agente participou da criação ou edição do código.
+Se algum item falhar — **em especial o primeiro** — **corrigir antes de apresentar**. Não sugerir commit sem co-autoria quando o agente participou da criação ou edição do código.
