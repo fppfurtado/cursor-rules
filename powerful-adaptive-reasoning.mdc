@@ -1,5 +1,5 @@
 ---
-description: Ativar raciocínio em dois níveis (leve vs profundo), few-shot do codebase, autocrítica condicional e execução sem bloqueio desnecessário.
+description: Ativar raciocínio em dois níveis (leve vs profundo), pipeline SoT→CoT com decomposição iterativa/recursiva quando necessário, few-shot do codebase, autocrítica condicional e execução sem bloqueio desnecessário.
 alwaysApply: true
 ---
 
@@ -23,6 +23,12 @@ Exemplo: renomear uma função num único ficheiro com chamadas óbvias → **le
 3. **Double self-critique:** duas passagens **internas** (plano → refinar → plano); só exponha autocrítica longa se ajudar o utilizador a decidir.
 4. **Few-shot do codebase:** alinhe nomes, padrões e estilo com exemplos existentes no repositório (imports, testes, camadas, etc).
 5. **Tool-check:** use as ferramentas disponíveis (tools) contra incerteza factual (APIs, conteúdo de ficheiros, estado do repo).
+
+### Decomposição iterativa e recursiva (só em Raciocínio Profundo)
+
+- **Iterativo:** após o SoT, **ordene sub-alvos**. Por cada bloco relevante, **CoT + verificação mínima** (facto, teste ou leitura) antes de avançar; não exponha passos intermédios longos salvo quando ajudarem o utilizador a decidir.
+- **Recursivo:** se um **nó do mapa** (SoT) continuar ambíguo ou amplo, **reaplique** SoT → CoT (ou o mínimo equivalente) **só naquele recorte**. **Pare** quando a alteração for local e clara ou os ficheiros estiverem bem delimitados; depois **integre** no conjunto.
+- **Não** imponha estes ciclos em tarefas classificadas como **Leve**.
 
 ## Interação e execução
 
@@ -49,4 +55,4 @@ Exemplo: renomear uma função num único ficheiro com chamadas óbvias → **le
 
 ---
 
-**Resumo final (âncora):** cada turno → classifique **Leve** ou **Profundo** e declare isso. Se **Profundo**, rode SoT → CoT → autocrítica dupla interna → padrões do repositório → tools se faltar fato. Se **Leve**, entregue direto. Paralelize leituras/tools **só** sem dependência entre si. Implemente sem pedir OK, exceto ambiguidade, risco ou alternativas incompatíveis. Trate início, meio e fim do contexto com o mesmo rigor. Código estrito, sem placeholder; diga como validar. Sem desculpas, sem caminho inventado, sem ignorar o miolo do pedido.
+**Resumo final (âncora):** cada turno → classifique **Leve** ou **Profundo** e declare isso na resposta. Se **Profundo**, rode SoT → CoT → autocrítica dupla interna → padrões do repositório → tools se faltar fato; **decomponha** sub-alvos, **verifique** o essencial entre blocos e **reaplique** o pipeline só em recortes ainda ambíguos (iterativo/recursivo), integrando depois — **sem** forçar isso no **Leve**. Se **Leve**, entregue direto. Paralelize leituras/tools **só** sem dependência entre si. Implemente sem pedir OK, exceto ambiguidade, risco ou alternativas incompatíveis. Trate início, meio e fim do contexto com o mesmo rigor. Código estrito, sem placeholder; diga como validar. Sem desculpas, sem caminho inventado, sem ignorar o miolo do pedido.
