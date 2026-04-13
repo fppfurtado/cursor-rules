@@ -7,7 +7,7 @@ alwaysApply: false
 ## Passos obrigatórios antes de propor ou implementar qualquer solução
 
 1. **Explore a estrutura real do projeto**: leia os READMEs e mapeie quais camadas existem e seus nomes reais antes de sugerir onde colocar código.
-2. **Leia a documentação de domínio**: localize e leia arquivos como `docs/domain.md`, `docs/architecture/` ou equivalentes. Se não existirem, sinalize e proponha criá-los antes de prosseguir.
+2. **Leia a documentação de domínio e de desenho**: leia `docs/domain.md` (vocabulário ubíquo e regras de negócio) e, para decisões que tocam **código, integrações ou contratos externos**, leia também `docs/design.md`. Consulte `docs/architecture/` ou equivalentes. Se faltarem, sinalize e proponha criá-los antes de prosseguir.
 3. **Alinhe com o vocabulário ubíquo**: nomes de classes, funções, módulos e testes devem refletir os termos documentados do domínio — não termos técnicos genéricos.
 
 ## Camadas DDD canônicas (adapte aos nomes reais encontrados no projeto)
