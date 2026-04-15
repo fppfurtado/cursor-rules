@@ -18,16 +18,16 @@ Exemplo: renomear uma função num único arquivo com chamadas óbvias → **lev
 
 ## Pipeline profundo (só quando classificar como Raciocínio Profundo)
 
-1. **Skeleton-of-Thought:** mapa de impacto — ficheiros, dependências, fronteiras (camadas/módulos).
+1. **Skeleton-of-Thought:** mapa de impacto — arquivos, dependências, fronteiras (camadas/módulos).
 2. **Chain-of-Thought:** elabore ponto a ponto, lógica, efeitos laterais, edge cases e race conditions relevantes.
-3. **Double self-critique:** duas passagens **internas** (plano → refinar → plano); só exponha autocrítica longa se ajudar o utilizador a decidir.
+3. **Double self-critique:** duas passagens **internas** (plano → refinar → plano); só exponha autocrítica longa se ajudar o usuário a decidir.
 4. **Few-shot do codebase:** alinhe nomes, padrões e estilo com exemplos existentes no repositório (imports, testes, camadas, etc).
-5. **Tool-check:** use as ferramentas disponíveis (tools) contra incerteza factual (APIs, conteúdo de ficheiros, estado do repo).
+5. **Tool-check:** use as ferramentas disponíveis (tools) contra incerteza factual (APIs, conteúdo de arquivos, estado do repo).
 
 ### Decomposição iterativa e recursiva (só em Raciocínio Profundo)
 
-- **Iterativo:** após o SoT, **ordene sub-alvos**. Por cada bloco relevante, **CoT + verificação mínima** (facto, teste ou leitura) antes de avançar; não exponha passos intermédios longos salvo quando ajudarem o utilizador a decidir.
-- **Recursivo:** se um **nó do mapa** (SoT) continuar ambíguo ou amplo, **reaplique** SoT → CoT (ou o mínimo equivalente) **só naquele recorte**. **Pare** quando a alteração for local e clara ou os ficheiros estiverem bem delimitados; depois **integre** no conjunto.
+- **Iterativo:** após o SoT, **ordene sub-alvos**. Por cada bloco relevante, **CoT + verificação mínima** (fato, teste ou leitura) antes de avançar; não exponha passos intermédios longos salvo quando ajudarem o usuário a decidir.
+- **Recursivo:** se um **nó do mapa** (SoT) continuar ambíguo ou amplo, **reaplique** SoT → CoT (ou o mínimo equivalente) **só naquele recorte**. **Pare** quando a alteração for local e clara ou os arquivos estiverem bem delimitados; depois **integre** no conjunto.
 - **Não** imponha estes ciclos em tarefas classificadas como **Leve**.
 
 ## Interação e execução
@@ -38,11 +38,11 @@ Exemplo: renomear uma função num único arquivo com chamadas óbvias → **lev
 
 ## Paralelização
 - Quando várias leituras, pesquisas no repositório ou outras ferramentas forem **independentes** (o resultado de uma **não** condiciona o pedido à seguinte), **execute-as em paralelo** no mesmo turno.
-- Reserve execução **sequencial** só quando houver **dependência de dados**, ordem obrigatória (ex.: ler antes de editar o mesmo ficheiro) ou quando o resultado anterior define o próximo passo.
+- Reserve execução **sequencial** só quando houver **dependência de dados**, ordem obrigatória (ex.: ler antes de editar o mesmo arquivo) ou quando o resultado anterior define o próximo passo.
 
 ## Contexto longo e qualidade
 
-- **Atenção simétrica:** trate com igual rigor início, meio e fim de prompts e ficheiros grandes.
+- **Atenção simétrica:** trate com igual rigor início, meio e fim de prompts e arquivos grandes.
 - **Sem ruído:** sem saudações nem desculpas; vá ao ponto.
 - **Código:** tipagem estrita onde a stack o permitir; sem `any` por preguiça; **sem placeholders** — implemente ou declare o que falta explicitamente.
 - **Verificação:** após mudanças relevantes, indique como validar (testes, comandos, cenários). Não duplique a policy de testes obrigatórios do projeto — cumpra-a.

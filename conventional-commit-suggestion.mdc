@@ -15,7 +15,7 @@ Ao **concluir** um conjunto de alterações neste repositório (implementação,
 - **Obrigatório:** a mensagem sugerida ao usuário é o **texto completo** (subject + linha em branco + `Co-authored-by: ...`), pronto para colar em `git commit` ou editor.
 - **Modelo:** usar a tabela em [Co-autoria de LLM (OBRIGATÓRIO)](#co-autoria-de-llm-obrigatório) (ex.: Cursor Composer → linha correspondente na tabela).
 
-Se o agente participou das alterações e for sugerir commit, **pare a resposta antes de enviar** e confira a secção **Checklist de validação** no fim deste arquivo; se faltar `Co-authored-by`, **não envie** — complete e só então envie.
+Se o agente participou das alterações e for sugerir commit, **pare a resposta antes de enviar** e confira a seção **Checklist de validação** no fim deste arquivo; se faltar `Co-authored-by`, **não envie** — complete e só então envie.
 
 ## Formato
 
