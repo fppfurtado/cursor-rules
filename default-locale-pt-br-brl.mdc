@@ -1,9 +1,0 @@
----
-description: Idioma e moeda padrão do projeto (PT-BR, Real BRL)
-alwaysApply: true
----
-
-# Locale e moeda padrão
-
-- **Idioma:** **português do Brasil (PT-BR)**, não português de Portugal (PT-PT). Mensagens ao **usuário**, documentação de produto, comentários de código e commits (quando o histórico do repo for predominantemente em português) devem seguir norma e vocabulário **brasileiros** (ex.: *usuário*, *arquivo*, *seção*, *fato* — evitar *utilizador*, *ficheiro*, *secção*, *facto* salvo citação ou nomes próprios).
-- **Moeda:** valores monetários apresentados ao usuário referem-se ao **Real (BRL)** salvo indicação explícita em contrário (ex.: integração que expõe outra moeda).

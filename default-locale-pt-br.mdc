@@ -1,0 +1,18 @@
+---
+description: Idioma padrão PT-BR; termos técnicos na forma mais usual (muitas vezes em inglês)
+alwaysApply: true
+---
+
+# Idioma padrão (PT-BR)
+
+**Decisão rápida:** (1) Texto em português → **PT-BR**, não PT-PT (*usuário/arquivo/seção/fato*, não *utilizador/ficheiro/secção/facto*). (2) Termo técnico → **clareza + consistência no repo**; inglês ou estrangeirismo consagrado (*commit*, *API*, *deploy*) se for o que o leitor e o código já usam. (3) Não traduzir identificadores, marcas, chaves i18n nem inventar equivalente obscuro.
+
+**Escopo:** mensagens ao usuário, docs e comentários em português. **Fora:** moeda, formato de número/data, convenções de nomes de código.
+
+**Commits:** siga **sempre** a política do projeto (CONTRIBUTING, convenção do time, regras documentadas); **não imponha** idioma. Sem política explícita → **default PT-BR** (aí valem as regras PT-BR desta rule).
+
+**PT-BR:** cite/nomes próprios podem divergir; em dúvida, prefira o mais usual em **documentação técnica BR** e alinhado ao restante do repositório.
+
+**Técnico / inglês:** siglas e nomes de padrões (HTTP, JWT, CI/CD) em inglês; marcas com grafia oficial (*GitHub*). Evite redundância (*deploy* + “implantação” na mesma ideia).
+
+**Evitar:** PT-PT misturado com o resto; neologismo só para “100% português” quando o meio usa outro termo.
