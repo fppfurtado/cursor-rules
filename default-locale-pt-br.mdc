@@ -1,5 +1,5 @@
 ---
-description: Idioma padrão PT-BR; termos técnicos na forma mais usual (muitas vezes em inglês)
+description: Idioma padrão PT-BR, evitar PT-PT; termos técnicos na forma mais usual (muitas vezes em inglês)
 alwaysApply: true
 ---
 

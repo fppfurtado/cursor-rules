@@ -1,5 +1,5 @@
 ---
-description: Após alterações, sugerir commit em Conventional Commits; todo LLM deve anexar Co-authored-by (obrigatório, não negociável).
+description: Após alterações, sugerir commit em Conventional Commits com idioma detectado no histórico; todo LLM deve anexar Co-authored-by (obrigatório, não negociável).
 alwaysApply: false
 ---
 
